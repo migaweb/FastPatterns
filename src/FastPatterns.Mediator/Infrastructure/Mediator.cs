@@ -2,15 +2,23 @@ using FastPatterns.Mediator.Core;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 namespace FastPatterns.Mediator.Infrastructure;
+/// <summary>
+/// Default implementation of <see cref="IMediator"/> resolving handlers from an
+/// <see cref="IServiceProvider"/>.
+/// </summary>
+/// <param name="serviceProvider">The service provider used to resolve handlers.</param>
 public class Mediator(IServiceProvider serviceProvider) : IMediator
 {
   private readonly IServiceProvider _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+
+  /// <inheritdoc />
   public async Task PublishAsync<TNotification>(TNotification notification, CancellationToken cancellationToken = default) where TNotification : INotification
   {
     var handlers = _serviceProvider.GetServices<INotificationHandler<TNotification>>();
     var tasks = handlers.Select(h => h.HandleAsync(notification, cancellationToken));
     await Task.WhenAll(tasks);
   }
+  /// <inheritdoc />
   public Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
   {
     var requestType = request.GetType();
@@ -19,6 +27,7 @@ public class Mediator(IServiceProvider serviceProvider) : IMediator
         .MakeGenericMethod(requestType, typeof(TResponse));
     return (Task<TResponse>)method.Invoke(this, [request, cancellationToken])!;
   }
+  /// <inheritdoc />
   public async Task SendAsync(IRequest request, CancellationToken cancellationToken = default)
   {
     var typed = (IRequest<Unit>)request;

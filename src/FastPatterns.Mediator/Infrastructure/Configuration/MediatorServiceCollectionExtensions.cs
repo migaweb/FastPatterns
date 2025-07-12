@@ -2,8 +2,21 @@ using FastPatterns.Mediator.Core;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FastPatterns.Mediator.Infrastructure.Configuration;
+/// <summary>
+/// Extension methods for registering mediator services with
+/// <see cref="IServiceCollection"/>.
+/// </summary>
 public static class MediatorServiceCollectionExtensions
 {
+  /// <summary>
+  /// Registers a pipeline behavior as an open generic type.
+  /// </summary>
+  /// <param name="services">The service collection to configure.</param>
+  /// <param name="behaviorType">The open generic behavior type.</param>
+  /// <returns>The updated service collection.</returns>
+  /// <exception cref="ArgumentException">
+  /// Thrown when <paramref name="behaviorType"/> is not an open generic type.
+  /// </exception>
   public static IServiceCollection AddPipeline(this IServiceCollection services, Type behaviorType)
   {
     if (!behaviorType.IsGenericTypeDefinition)
@@ -13,6 +26,12 @@ public static class MediatorServiceCollectionExtensions
     return services;
   }
 
+  /// <summary>
+  /// Adds the core mediator services and discovers handlers from the application
+  /// dependencies.
+  /// </summary>
+  /// <param name="services">The service collection to configure.</param>
+  /// <returns>The updated service collection.</returns>
   public static IServiceCollection AddMediator(this IServiceCollection services)
   {
     services.AddTransient<IMediator, Mediator>();
@@ -24,6 +43,9 @@ public static class MediatorServiceCollectionExtensions
     return services;
   }
 
+  /// <summary>
+  /// Registers all request handlers found in application dependencies.
+  /// </summary>
   private static IServiceCollection AddRequestHandlers(this IServiceCollection services)
   {
     services.Scan(scan => scan
@@ -34,6 +56,11 @@ public static class MediatorServiceCollectionExtensions
     return services;
   }
 
+  /// <summary>
+  /// Registers all notification handlers found in application dependencies.
+  /// </summary>
+  /// <param name="services">The service collection to configure.</param>
+  /// <returns>The updated service collection.</returns>
   public static IServiceCollection AddNotificationHandlers(this IServiceCollection services)
   {
     services.Scan(scan => scan

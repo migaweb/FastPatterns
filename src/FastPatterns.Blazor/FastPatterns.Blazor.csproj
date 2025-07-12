@@ -7,11 +7,45 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!-- Multi-target for maximum compatibility -->
+    <TargetFrameworks>net9.0</TargetFrameworks>
+
+    <!-- Output -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <OutputPath>..\..\artifacts\</OutputPath>
+
+    <!-- NuGet metadata -->
+    <PackageId>FastPatterns.Observer</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Mikael Storman Gustavsson</Authors>
+    <Company>migaweb</Company>
+    <Description>A lightweight Mediator pattern for Clean Architecture and Blazor applications</Description>
+    <PackageTags>mediator cqrs blazor clean-architecture patterns</PackageTags>
     <PackageProjectUrl>https://github.com/migaweb/FastPatterns</PackageProjectUrl>
     <RepositoryUrl>https://github.com/migaweb/FastPatterns</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+
+    <!-- XML documentation and symbols -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- SourceLink for GitHub -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <EnableSourceLink>true</EnableSourceLink>
+
+    <!-- Optional: Package signing -->
+    <!-- <SignPackage>true</SignPackage>
+    <PackageCertificateThumbprint>YOUR_CERT_THUMBPRINT</PackageCertificateThumbprint> -->
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Include README.md in the package -->
+    <None Include="..\..\readme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FastPatterns.Core\FastPatterns.Core.csproj" />

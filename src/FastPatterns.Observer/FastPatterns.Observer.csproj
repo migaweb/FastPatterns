@@ -19,8 +19,8 @@
     <Version>1.0.0</Version>
     <Authors>Mikael Storman Gustavsson</Authors>
     <Company>migaweb</Company>
-    <Description>A lightweight Mediator pattern for Clean Architecture and Blazor applications</Description>
-    <PackageTags>mediator cqrs blazor clean-architecture patterns</PackageTags>
+    <Description>Observable state management primitives with state manager and view state base classes.</Description>
+    <PackageTags>observer state-management blazor dotnet</PackageTags>
     <PackageProjectUrl>https://github.com/migaweb/FastPatterns</PackageProjectUrl>
     <RepositoryUrl>https://github.com/migaweb/FastPatterns</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

@@ -1,4 +1,4 @@
-# FastPatterns
+﻿# FastPatterns
 
 A collection of lightweight design pattern implementations for .NET applications.
 
@@ -20,7 +20,8 @@ using (new ScopedStopwatch(elapsed =>
 ## Extensions
 `FastPatterns.Extensions` offers reusable extension methods to enhance .NET development, focusing on logging and diagnostics:
 
-- **LoggerExtensions**: Extension methods for `ILogger` to simplify logging timed operations. The `TimedScope` method creates a disposable scope that logs the duration of an operation when disposed.
+### LoggerExtensions 
+Extension methods for `ILogger` to simplify logging timed operations. The `TimedScope` method creates a disposable scope that logs the duration of an operation when disposed.
 ```csharp
 public class OrderService
 {
@@ -39,8 +40,32 @@ public class OrderService
         }
     }
 }
-
 ```
+### Encrypting EF Core Columns using DataProtectionService
+
+You can use the `IDataProtectionService` to encrypt specific EF Core properties like this:
+
+```csharp
+var encryptionConverter = new ValueConverter<string, string>(
+    v => dataProtectionService.Encrypt(v),
+    v => dataProtectionService.Decrypt(v)
+);
+
+modelBuilder.Entity<Position>()
+    .Property(e => e.Name)
+    .HasConversion(encryptionConverter);
+```
+#### 🔧 Setup in Program.cs
+
+```csharp
+builder.Services.AddFastPatternDataProtection(builder.Configuration);
+```
+```json
+"FastPatterns:Extensions:Security": {
+  "EncryptionKey": "your-key-here"
+}
+```
+
 ## Mediator
 The `FastPatterns.Mediator` project provides a simple mediator with request/response and notification support.
 

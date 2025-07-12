@@ -2,6 +2,45 @@
 
 A collection of lightweight design pattern implementations for .NET applications.
 
+## Core
+`FastPatterns.Core` provides foundational utilities and building blocks for .NET applications. It includes:
+
+- **ScopedStopwatch**: A struct for measuring the elapsed time of code blocks, invoking a callback with the elapsed time when disposed. Useful for lightweight performance diagnostics and timing operations.
+
+```csharp
+
+using (new ScopedStopwatch(elapsed => 
+         Console.WriteLine($"Elapsed: {elapsed.TotalMilliseconds} ms")))
+{
+    Task.Delay(1000).Wait(); // simulate work
+}
+
+```
+
+## Extensions
+`FastPatterns.Extensions` offers reusable extension methods to enhance .NET development, focusing on logging and diagnostics:
+
+- **LoggerExtensions**: Extension methods for `ILogger` to simplify logging timed operations. The `TimedScope` method creates a disposable scope that logs the duration of an operation when disposed.
+```csharp
+public class OrderService
+{
+    private readonly ILogger<OrderService> _logger;
+
+    public OrderService(ILogger<OrderService> logger)
+    {
+        _logger = logger;
+    }
+
+    public async Task ProcessOrderAsync()
+    {
+        using (_logger.TimedScope("ProcessOrder"))
+        {
+            await Task.Delay(500); // simulate work
+        }
+    }
+}
+
+```
 ## Mediator
 The `FastPatterns.Mediator` project provides a simple mediator with request/response and notification support.
 

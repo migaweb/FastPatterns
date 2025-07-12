@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Multi-target for maximum compatibility -->
+    <TargetFrameworks>net9.0</TargetFrameworks>
+
+    <!-- Output -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <OutputPath>..\..\artifacts\</OutputPath>
+
+    <!-- NuGet metadata -->
+    <PackageId>FastPatterns.Extensions</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Mikael Storman Gustavsson</Authors>
+    <Company>migaweb</Company>
+    <Description>A library small but powerful reusable building blocks.</Description>
+    <PackageTags>reusable dependency-injection</PackageTags>
+    <PackageProjectUrl>https://github.com/migaweb/FastPatterns</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/migaweb/FastPatterns</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+
+    <!-- XML documentation and symbols -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- SourceLink for GitHub -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <EnableSourceLink>true</EnableSourceLink>
+
+    <!-- Optional: Package signing -->
+    <!-- <SignPackage>true</SignPackage>
+    <PackageCertificateThumbprint>YOUR_CERT_THUMBPRINT</PackageCertificateThumbprint> -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Include README.md in the package -->
+    <None Include="..\..\readme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FastPatterns.Core\FastPatterns.Core.csproj" />
+  </ItemGroup>
+
+</Project>

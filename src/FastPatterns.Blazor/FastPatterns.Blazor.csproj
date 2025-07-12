@@ -15,7 +15,7 @@
     <OutputPath>..\..\artifacts\</OutputPath>
 
     <!-- NuGet metadata -->
-    <PackageId>FastPatterns.Observer</PackageId>
+    <PackageId>FastPatterns.Blazor</PackageId>
     <Version>1.0.0</Version>
     <Authors>Mikael Storman Gustavsson</Authors>
     <Company>migaweb</Company>

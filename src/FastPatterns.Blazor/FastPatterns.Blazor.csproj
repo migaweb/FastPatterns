@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastPatterns.Core\FastPatterns.Core.csproj" />
+    <ProjectReference Include="..\FastPatterns.Observer\FastPatterns.Observer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.7" />
   </ItemGroup>
 
 </Project>

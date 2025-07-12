@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FastPatterns.Observer\FastPatterns.Observer.csproj" />
+    <ProjectReference Include="..\..\src\FastPatterns.Blazor\FastPatterns.Blazor.csproj" />
   </ItemGroup>
 
 </Project>

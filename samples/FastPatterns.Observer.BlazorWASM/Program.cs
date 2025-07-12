@@ -11,4 +11,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddScoped<CounterStateManager>();
 
+builder.Services.AddScoped<UserSessionState>();
+
 await builder.Build().RunAsync();

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPatterns.Mediator.WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPatterns.Mediator.UnitTests", "tests\FastPatterns.Mediator.UnitTests\FastPatterns.Mediator.UnitTests.csproj", "{3D6A693C-5140-408B-862C-1A751ACE8814}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPatterns.Observer.BlazorWASM", "samples\FastPatterns.Observer.BlazorWASM\FastPatterns.Observer.BlazorWASM.csproj", "{86C925AB-FB71-6034-F592-3609312689AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{3D6A693C-5140-408B-862C-1A751ACE8814}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D6A693C-5140-408B-862C-1A751ACE8814}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D6A693C-5140-408B-862C-1A751ACE8814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86C925AB-FB71-6034-F592-3609312689AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C925AB-FB71-6034-F592-3609312689AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C925AB-FB71-6034-F592-3609312689AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C925AB-FB71-6034-F592-3609312689AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{06B0E112-B7A4-C942-B73F-E1AEA63C37A1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{870B4B84-12BD-4054-9AA7-B5F9415DF8A8} = {01079A7A-C5DD-4FBD-8E0B-16AB2EE0ED52}
 		{3D6A693C-5140-408B-862C-1A751ACE8814} = {7F75C370-2DA0-4AEC-91FC-3D27085E69FD}
+		{86C925AB-FB71-6034-F592-3609312689AF} = {01079A7A-C5DD-4FBD-8E0B-16AB2EE0ED52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {949F64C4-7CB0-4C44-A899-C38894BE059D}

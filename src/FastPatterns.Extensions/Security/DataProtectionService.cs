@@ -9,25 +9,19 @@ namespace FastPatterns.Extensions.Security;
 /// <summary>
 /// Provides methods for encrypting and decrypting data using data protection.
 /// </summary>
-public class DataProtectionService : IDataProtectionService
+/// <remarks>
+/// Initializes a new instance of the <see cref="DataProtectionService"/> class.
+/// </remarks>
+/// <param name="provider">The data protection provider.</param>
+/// <param name="options">The security options containing the encryption key.</param>
+/// <param name="logger">The logger instance for logging errors and information.</param>
+public class DataProtectionService(
+    IDataProtectionProvider provider,
+    IOptions<SecurityOptions> options,
+    ILogger<DataProtectionService> logger) : IDataProtectionService
 {
-  private readonly IDataProtector _protector;
-  private readonly ILogger<DataProtectionService> _logger;
-
-  /// <summary>
-  /// Initializes a new instance of the <see cref="DataProtectionService"/> class.
-  /// </summary>
-  /// <param name="provider">The data protection provider.</param>
-  /// <param name="options">The security options containing the encryption key.</param>
-  /// <param name="logger">The logger instance for logging errors and information.</param>
-  public DataProtectionService(
-      IDataProtectionProvider provider,
-      IOptions<SecurityOptions> options,
-      ILogger<DataProtectionService> logger)
-  {
-    _protector = provider.CreateProtector(options.Value.EncryptionKey);
-    _logger = logger;
-  }
+  private readonly IDataProtector _protector = provider.CreateProtector(options.Value.EncryptionKey);
+  private readonly ILogger<DataProtectionService> _logger = logger;
 
   /// <summary>
   /// Encrypts the specified unencrypted data.

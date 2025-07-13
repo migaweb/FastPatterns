@@ -18,10 +18,22 @@ using (new ScopedStopwatch(elapsed =>
 ```
 
 ## Extensions
-`FastPatterns.Extensions` offers reusable extension methods to enhance .NET development, focusing on logging and diagnostics:
+`FastPatterns.Extensions` offers reusable extension methods and utility types to enhance .NET development, focusing on logging, diagnostics, and resource management:
 
-### LoggerExtensions 
-Extension methods for `ILogger` to simplify logging timed operations. The `TimedScope` method creates a disposable scope that logs the duration of an operation when disposed.
+- **LoggerExtensions**: Extension methods for `ILogger` to simplify logging timed operations. The `TimedScope` method creates a disposable scope that logs the duration of an operation when disposed.
+- **DisposableAction**: A struct that executes a provided action when disposed. Useful for managing temporary event subscriptions, resource cleanup, or scoped logic where an action should run at the end of a block.
+
+### DisposableAction Example
+```csharp
+void HookTemporaryEvent(Button btn)
+{
+    btn.Click += OnClick;
+
+    using var _ = new DisposableAction(() => btn.Click -= OnClick);
+    // Scoped logic...
+}
+```
+### Logger Example
 ```csharp
 public class OrderService
 {
@@ -44,8 +56,6 @@ public class OrderService
 ### Encrypting EF Core Columns using DataProtectionService
 
 You can use the `IDataProtectionService` to encrypt specific EF Core properties like this:
-
-```csharp
 var encryptionConverter = new ValueConverter<string, string>(
     v => dataProtectionService.Encrypt(v),
     v => dataProtectionService.Decrypt(v)
@@ -53,19 +63,10 @@ var encryptionConverter = new ValueConverter<string, string>(
 
 modelBuilder.Entity<Position>()
     .Property(e => e.Name)
-    .HasConversion(encryptionConverter);
-```
-#### 🔧 Setup in Program.cs
-
-```csharp
-builder.Services.AddFastPatternDataProtection(builder.Configuration);
-```
-```json
-"FastPatterns:Extensions:Security": {
+    .HasConversion(encryptionConverter);#### 🔧 Setup in Program.cs
+builder.Services.AddFastPatternDataProtection(builder.Configuration);"FastPatterns:Extensions:Security": {
   "EncryptionKey": "your-key-here"
 }
-```
-
 ## Mediator
 The `FastPatterns.Mediator` project provides a simple mediator with request/response and notification support.
 

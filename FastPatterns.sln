@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPatterns.Mapper.ConsoleApp", "samples\FastPatterns.Mapper.ConsoleApp\FastPatterns.Mapper.ConsoleApp.csproj", "{7CEAEE88-3396-4039-B5FE-7569165587CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastPatterns.Extensions.UnitTests", "tests\FastPatterns.Extensions.UnitTests\FastPatterns.Extensions.UnitTests.csproj", "{4F38A1DE-D18B-46A4-ACEF-BA29AFE7D91C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{7CEAEE88-3396-4039-B5FE-7569165587CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CEAEE88-3396-4039-B5FE-7569165587CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CEAEE88-3396-4039-B5FE-7569165587CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F38A1DE-D18B-46A4-ACEF-BA29AFE7D91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F38A1DE-D18B-46A4-ACEF-BA29AFE7D91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F38A1DE-D18B-46A4-ACEF-BA29AFE7D91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F38A1DE-D18B-46A4-ACEF-BA29AFE7D91C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{86C925AB-FB71-6034-F592-3609312689AF} = {01079A7A-C5DD-4FBD-8E0B-16AB2EE0ED52}
 		{C90C3D56-7A73-4624-BEE6-1BAE28F8AFBC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{7CEAEE88-3396-4039-B5FE-7569165587CF} = {01079A7A-C5DD-4FBD-8E0B-16AB2EE0ED52}
+		{4F38A1DE-D18B-46A4-ACEF-BA29AFE7D91C} = {7F75C370-2DA0-4AEC-91FC-3D27085E69FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {949F64C4-7CB0-4C44-A899-C38894BE059D}

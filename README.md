@@ -22,6 +22,7 @@ using (new ScopedStopwatch(elapsed =>
 
 - **LoggerExtensions**: Extension methods for `ILogger` to simplify logging timed operations. The `TimedScope` method creates a disposable scope that logs the duration of an operation when disposed.
 - **DisposableAction**: A struct that executes a provided action when disposed. Useful for managing temporary event subscriptions, resource cleanup, or scoped logic where an action should run at the end of a block.
+- **Mapping utilities**: `SimpleMapper`, `MapWith`, and `RecordMapper` provide lightweight object-to-object mapping helpers.
 
 ### DisposableAction Example
 ```csharp
@@ -52,6 +53,22 @@ public class OrderService
         }
     }
 }
+```
+### Mappers
+`FastPatterns.Extensions` provides three small helpers for copying values between types:
+1. **SimpleMapper** - copies matching writable properties from a source object to a new target instance.
+2. **MapWith** - extension method that first uses `SimpleMapper` then lets you run additional mapping logic via a delegate.
+3. **RecordMapper** - creates a new record by matching constructor parameter names to source properties.
+
+```csharp
+var source = new Source();
+
+var dest = source.MapWith<Source, Dest>((src, dest) =>
+{
+  dest.NameReversed = src.Name.ReverseString();
+  dest.Nested = SimpleMapper<NestedSource, NestedDest>.Map(src.Nested);
+  dest.Car = RecordMapper.MapToRecord<Car, CarDto>(source.Car);
+});
 ```
 ### Encrypting EF Core Columns using DataProtectionService
 

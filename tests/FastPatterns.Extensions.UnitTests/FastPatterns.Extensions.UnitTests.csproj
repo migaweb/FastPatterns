@@ -16,4 +16,8 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FastPatterns.Extensions\FastPatterns.Extensions.csproj" />
+  </ItemGroup>
+
 </Project>

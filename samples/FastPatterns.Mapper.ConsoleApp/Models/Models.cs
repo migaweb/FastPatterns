@@ -1,28 +1,28 @@
 ﻿namespace FastPatterns.Mapper.ConsoleApp.Models;
-internal record Car(string Make) { }
-internal record CarDto(string Make) { }
+public record Car(string Make) { }
+public record CarDto(string Make) { }
 
-internal record Source
+public class Source
 {
-  internal int Id { get; set; } = 999;
-  internal decimal Price { get; set; } = 123.45m;
-  internal string Name { get; set; } = "Test Name";
-  internal DateTime BestBefore { get; set; } = DateTime.Now;
-  internal IEnumerable<string> Hobbies { get; set; } = ["Running", ".NET", "Gardening"];
-  internal NestedSource? Nested { get; set; } = new() { Occupation = "Programmer" };
-  internal Car Car { get; set; } = new("Toyota");
+  public int Id { get; set; } = 999;
+  public decimal Price { get; set; } = 123.45m;
+  public string Name { get; set; } = "Test Name";
+  public DateTime BestBefore { get; set; } = DateTime.Now;
+  public IEnumerable<string> Hobbies { get; set; } = ["Running", ".NET", "Gardening"];
+  public NestedSource? Nested { get; set; } = new() { Occupation = "Programmer" };
+  public Car Car { get; set; } = new("Toyota");
 }
 
-internal record Dest
+public class Dest
 {
-  internal int Id { get; set; }
-  internal decimal Price { get; set; }
-  internal string Name { get; set; } = string.Empty;
-  internal DateTime BestBefore { get; set; }
-  internal IEnumerable<string> Hobbies { get; set; } = [];
-  internal NestedDest? Nested { get; set; }
-  internal CarDto? Car { get; set; }
-  internal string NameReversed { get; set; } = string.Empty;
+  public int Id { get; set; }
+  public decimal Price { get; set; }
+  public string Name { get; set; } = string.Empty;
+  public DateTime BestBefore { get; set; }
+  public IEnumerable<string> Hobbies { get; set; } = [];
+  public NestedDest? Nested { get; set; }
+  public CarDto? Car { get; set; }
+  public string NameReversed { get; set; } = string.Empty;
 
   public override string ToString()
   {
@@ -32,12 +32,12 @@ internal record Dest
   }
 }
 
-internal record NestedSource()
+public class NestedSource()
 {
-  internal string? Occupation { get; set; }
+  public string? Occupation { get; set; }
 }
 
-internal record NestedDest
+public class NestedDest
 {
-  internal string? Occupation { get; set; }
+  public string? Occupation { get; set; }
 }

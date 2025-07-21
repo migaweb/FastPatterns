@@ -53,4 +53,48 @@ public static class SimpleMapper<TSource, TTarget> where TTarget : new()
     _mapAction(source, target);
     return target;
   }
+
+  /// <summary>
+  /// Maps each element in the provided <see cref="IEnumerable{TSource}"/> to a <typeparamref name="TTarget"/> instance
+  /// using a predefined mapping logic, returning the results as a fully populated <see cref="IList{TTarget}"/>.
+  /// </summary>
+  /// <param name="source">The source collection of <typeparamref name="TSource"/> objects to map.</param>
+  /// <returns>
+  /// An <see cref="IList{TTarget}"/> containing all mapped instances.
+  /// Returns an empty list if <paramref name="source"/> is <c>null</c>.
+  /// </returns>
+  public static IList<TTarget> Map(IEnumerable<TSource> source)
+  {
+    if (source is null)
+      return [];
+
+    var resultCollection = new List<TTarget>();
+    foreach (var item in source) 
+    {
+      resultCollection.Add(Map(item));
+    }
+
+    return resultCollection;
+  }
+
+  /// <summary>
+  /// Lazily maps each element in the provided <see cref="IEnumerable{TSource}"/> to a <typeparamref name="TTarget"/> instance
+  /// using a predefined mapping logic.
+  /// Elements are yielded one at a time during enumeration using deferred execution.
+  /// </summary>
+  /// <param name="source">The source collection of <typeparamref name="TSource"/> objects to map.</param>
+  /// <returns>
+  /// An <see cref="IEnumerable{TTarget}"/> sequence of mapped instances.
+  /// If <paramref name="source"/> is <c>null</c>, an empty sequence is returned.
+  /// </returns>
+  public static IEnumerable<TTarget> MapLazy(IEnumerable<TSource> source)
+  {
+    if (source is null)
+      yield break;
+    
+    foreach (var item in source)
+    {
+      yield return item is null ? new TTarget() : Map(item);
+    }
+  }
 }

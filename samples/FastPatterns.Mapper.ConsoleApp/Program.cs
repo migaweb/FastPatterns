@@ -6,26 +6,29 @@ using FastPatterns.Mapper.ConsoleApp.Models;
 
 bool printProperties = true;
 
-foreach (var i in Enumerable.Range(1, 10))
-{
-  using var _ = new ScopedStopwatch(elapsed =>
+List<Source> sourceItems = [];
+sourceItems.AddRange(Enumerable.Range(1, 10).Select(i => new Source()));
+
+using var _ = new ScopedStopwatch(elapsed =>
          Console.WriteLine($"Elapsed: {elapsed.TotalMilliseconds} ms"));
 
-  var source = new Source();
+var destCollection = sourceItems.MapWith<Source, Dest>((src, dest) =>
+{
+  dest.NameReversed = src.Name.ReverseString();
+  dest.Nested = SimpleMapper<NestedSource, NestedDest>.Map(src.Nested);
+  dest.Car = RecordMapper.MapToRecord<Car, CarDto>(src.Car);
+});
 
-  var dest = source.MapWith<Source, Dest>((src, dest) =>
+if (printProperties)
+{
+  foreach (var item in destCollection)
   {
-    dest.NameReversed = src.Name.ReverseString();
-    dest.Nested = SimpleMapper<NestedSource, NestedDest>.Map(src.Nested);
-    dest.Car = RecordMapper.MapToRecord<Car, CarDto>(source.Car);
-  });
-
-  if (printProperties)
-  {
-    Console.WriteLine($"Dest: {dest}");
+    Console.WriteLine(item);
   }
-
-  Console.WriteLine("Mapping completed successfully.");
 }
+
+Console.WriteLine("Mapping completed successfully.");
+
+
 
 

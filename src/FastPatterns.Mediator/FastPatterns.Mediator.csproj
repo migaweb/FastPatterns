@@ -58,10 +58,5 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
     <PackageReference Include="Scrutor" Version="6.1.0" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\FastPatterns.Core\FastPatterns.Core.csproj" />
-  </ItemGroup>
   
 </Project>

@@ -92,7 +92,26 @@ The `FastPatterns.Mediator` project provides a simple mediator with request/resp
 - Request handlers implement `IRequestHandler<TRequest, TResponse>` while notifications use `INotificationHandler<TNotification>`.
 - `IPipelineBehavior` allows cross-cutting code to run before and after a request handler.
 - Extension methods register the mediator and all handlers with `IServiceCollection`.
+- `AddValidationBehavior` registers the built-in validation pipeline and discovers all `IValidator<T>` implementations.
 - See `samples/FastPatterns.Mediator.WebApiSample` for a minimal API example.
+
+### Validation Pipeline Example
+
+```csharp
+var services = new ServiceCollection();
+services.AddMediator()
+        .AddValidationBehavior();
+
+var mediator = services.BuildServiceProvider()
+                       .GetRequiredService<IMediator>();
+
+await mediator.SendAsync(new CreateUserCommand
+{
+    Name = "John Doe",
+    Username = "doe87",
+    Email = "john@doe.com"
+});
+```
 
 ## Observer
 `FastPatterns.Observer` implements a basic observable state system.

@@ -18,9 +18,8 @@ try
   var result = await mediator.SendAsync(new CreateUserCommand()
   {
     Name = "John Doe",
-    Password = "johnDoe1",
-    PasswordMatch = "jonDoe1",
-    Username = "doe87"
+    Username = "doe87",
+    Email = "john@doe.com"
   });
 
   Console.WriteLine($"User creation result: {result}");

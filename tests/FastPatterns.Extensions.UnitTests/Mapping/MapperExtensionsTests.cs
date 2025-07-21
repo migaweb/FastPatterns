@@ -55,4 +55,46 @@ public sealed class MapperExtensionsTests
         Assert.IsTrue(called);
         Assert.AreEqual("set", result.Extra);
     }
+
+    [TestMethod]
+    public void MapWith_Collection_Maps_All_Items()
+    {
+        var src = new[]
+        {
+            new Source { Id = 1, Name = "A" },
+            new Source { Id = 2, Name = "B" }
+        };
+
+        var result = MapperExtensions.MapWith<Source, Target>(src);
+
+        Assert.AreEqual(2, result.Count);
+        Assert.AreEqual(src[0].Id, result[0].Id);
+        Assert.AreEqual(src[1].Name, result[1].Name);
+    }
+
+    [TestMethod]
+    public void MapWith_Collection_Invokes_Custom_Mapping()
+    {
+        var src = new[] { new Source { Id = 3, Name = "C" } };
+
+        var result = MapperExtensions.MapWith<Source, Target>(src, (s, d) => d.Extra = $"{s.Name}-{s.Id}");
+
+        Assert.AreEqual("C-3", result[0].Extra);
+    }
+
+    [TestMethod]
+    public void MapLazyWith_Collection_Returns_Mapped_Items_Lazily()
+    {
+        var src = new[]
+        {
+            new Source { Id = 4, Name = "D" },
+            new Source { Id = 5, Name = "E" }
+        };
+
+        var result = MapperExtensions.MapLazyWith<Source, Target>(src, (s, d) => d.Extra = s.Name).ToList();
+
+        Assert.AreEqual(2, result.Count);
+        Assert.AreEqual("D", result[0].Extra);
+        Assert.AreEqual("E", result[1].Extra);
+    }
 }

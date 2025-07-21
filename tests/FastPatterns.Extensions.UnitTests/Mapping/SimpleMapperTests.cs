@@ -23,7 +23,7 @@ public sealed class SimpleMapperTests
     [TestMethod]
     public void Map_NullSource_Returns_Default_Target()
     {
-        var result = SimpleMapper<Source, Target>.Map(null);
+        var result = SimpleMapper<Source, Target>.Map((Source?)null);
 
         Assert.IsNotNull(result);
         Assert.AreEqual(0, result.Id);
@@ -53,5 +53,58 @@ public sealed class SimpleMapperTests
         Assert.AreEqual(0L, result.Age);
         // ReadOnlyProp cannot be set
         Assert.AreEqual(0, result.ReadOnlyProp);
+    }
+
+    [TestMethod]
+    public void Map_Collection_Returns_All_Mapped_Items()
+    {
+        var src = new[]
+        {
+            new Source { Id = 1, Name = "A", Age = 10 },
+            new Source { Id = 2, Name = "B", Age = 20 }
+        };
+
+        var result = SimpleMapper<Source, Target>.Map((IEnumerable<Source>)src);
+
+        Assert.AreEqual(2, result.Count);
+        Assert.AreEqual(src[0].Id, result[0].Id);
+        Assert.AreEqual(src[0].Name, result[0].Name);
+        Assert.AreEqual(0L, result[0].Age);
+        Assert.AreEqual(src[1].Id, result[1].Id);
+        Assert.AreEqual(src[1].Name, result[1].Name);
+    }
+
+    [TestMethod]
+    public void Map_Null_Collection_Returns_Empty_List()
+    {
+        var result = SimpleMapper<Source, Target>.Map((IEnumerable<Source>)null!);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0, result.Count);
+    }
+
+    [TestMethod]
+    public void MapLazy_Collection_Returns_Mapped_Sequence()
+    {
+        var src = new[]
+        {
+            new Source { Id = 3, Name = "C", Age = 10 },
+            new Source { Id = 4, Name = "D", Age = 20 }
+        };
+
+        var result = SimpleMapper<Source, Target>.MapLazy((IEnumerable<Source>)src).ToList();
+
+        Assert.AreEqual(2, result.Count);
+        Assert.AreEqual(src[0].Id, result[0].Id);
+        Assert.AreEqual(src[1].Id, result[1].Id);
+    }
+
+    [TestMethod]
+    public void MapLazy_Null_Collection_Returns_Empty_Sequence()
+    {
+        var result = SimpleMapper<Source, Target>.MapLazy((IEnumerable<Source>)null!).ToList();
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0, result.Count);
     }
 }

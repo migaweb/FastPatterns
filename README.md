@@ -118,8 +118,28 @@ await mediator.SendAsync(new CreateUserCommand
 
 - `Observer` manages subscriptions using `AddStateChangeListeners` and `BroadcastStateChange`.
 - `StateManager<TState>` extends `Observer` and exposes a `SetState` method that only broadcasts when the state changes.
+- `StateStoreBase<TState>` provides an asynchronous store with `EnsureLoadedAsync`, `ReloadAsync`, and `Invalidate` helpers.
+- `SingleFlight<TKey, TResult>` implements a single-flight pattern that guarantees only one producer runs per key while other callers await the same task.
 - `ViewState` records a timestamp and loading flag and can be extended with custom state data.
 - The Blazor WebAssembly sample under `samples/FastPatterns.Observer.BlazorWASM` shows how to manage component state with these classes.
+
+### SingleFlight Example
+
+```csharp
+var sf = new SingleFlight<string, WeatherState>();
+var state = await sf.RunAsync("weather", _ => LoadWeatherAsync(), ct);
+```
+
+### StateStoreBase Example
+
+```csharp
+public class WeatherStore : StateStoreBase<WeatherState>
+{
+    protected override Task<WeatherState?> LoadCoreAsync(CancellationToken ct) => LoadWeatherAsync();
+}
+
+await weatherStore.EnsureLoadedAsync();
+```
 
 ## ObservableComponentBase
 `ObservableComponentBase<TState>` in `FastPatterns.Blazor` integrates the observer pattern with Blazor components. It:

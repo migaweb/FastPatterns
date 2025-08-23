@@ -2,8 +2,8 @@
 public sealed class SingleFlight<TKey, TResult>
   where TKey : notnull
 {
-  private readonly Dictionary<TKey, Task<TResult>> _inflight = new();
-  private readonly object _lock = new();
+  private readonly Dictionary<TKey, Task<TResult>> _inflight = [];
+  private readonly Lock _lock = new();
 
   public Task<TResult> RunAsync(TKey key, Func<CancellationToken, Task<TResult>> factory, CancellationToken ct = default)
   {

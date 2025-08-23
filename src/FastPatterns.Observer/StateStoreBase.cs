@@ -9,7 +9,7 @@ public abstract class StateStoreBase<TState>
   where TState : ViewState, new()
 {
   private readonly SingleFlight<string, TState> _sf = new();
-  protected TState? _state;
+  private TState? _state;
 
   /// <summary>
   /// Gets the current state value.

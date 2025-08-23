@@ -7,12 +7,12 @@ public partial class Counter : ComponentBase
 {
   [Inject]
   private CounterStateManager CounterStateManager { get; set; } = default!;
-  protected override void OnInitialized()
+  
+  protected override async Task OnAfterRenderAsync(bool firstRender)
   {
-    currentCount = CounterStateManager.State?.Count ?? 0;
+    await CounterStateManager.EnsureLoadedAsync();
+    await base.OnAfterRenderAsync(firstRender);
   }
-
-  private int currentCount = 0;
 
   private void IncrementCount()
   {

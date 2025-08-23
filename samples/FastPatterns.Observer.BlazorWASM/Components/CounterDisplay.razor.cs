@@ -11,6 +11,12 @@ public partial class CounterDisplay : ComponentBase, IDisposable
   private int CurrentCount => CounterStateManager.State?.Count ?? 0;
   private DateTime LastUpdate => CounterStateManager.State?.LastUpdated ?? DateTime.MinValue;
 
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    await CounterStateManager.EnsureLoadedAsync();
+    await base.OnAfterRenderAsync(firstRender);
+  }
+
   protected override void OnInitialized()
   {
     // Subscribe to state changes
